@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MINHA VIDA EU TE AMO ❤️</title>
+  <title>Meu amor, Eu te amo ❤️</title>
 
   <!-- Fonte romântica -->
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
@@ -331,28 +331,41 @@
 </div>
 
   </div>
-  <script>
+<script>
 
   // DATA QUE VOCÊS COMEÇARAM
+  // ANO, MÊS-1, DIA, HORA, MINUTO
   const startDate = new Date(2026, 1, 27, 0, 0, 0);
 
   function updateCounter(){
 
     const now = new Date();
 
-    let diff = now - startDate;
+    // Cálculo REAL de meses
+    let months =
+      (now.getFullYear() - startDate.getFullYear()) * 12 +
+      (now.getMonth() - startDate.getMonth());
 
-    const seconds = Math.floor(diff / 1000) % 60;
-    const minutes = Math.floor(diff / (1000 * 60)) % 60;
-    const hours = Math.floor(diff / (1000 * 60 * 60)) % 24;
+    // Se ainda não chegou no dia do mês, reduz 1
+    if(now.getDate() < startDate.getDate()){
+      months--;
+    }
 
-    const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
+    // Última data de aniversário
+    let lastMonthDate = new Date(startDate);
+    lastMonthDate.setMonth(startDate.getMonth() + months);
 
-    const months = Math.floor(totalDays / 30);
-    const days = totalDays % 30;
+    // Diferença restante
+    let diff = now - lastMonthDate;
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
 
     document.getElementById("love-counter").innerHTML =
-      `${months} meses, ${days} dias <br>
+      `${months} meses e ${days} dias <br>
        ${hours}h ${minutes}min ${seconds}s`;
 
   }
